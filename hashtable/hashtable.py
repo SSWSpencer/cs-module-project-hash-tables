@@ -88,8 +88,23 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-        self.array[self.hash_index(key)] = value
+        #Your code here
+        entry = HashTableEntry(key, value)
+        if self.array[self.hash_index(key)] is None:
+            self.array[self.hash_index(key)] = entry
+        else:
+            current = self.array[self.hash_index(key)]
+            if current.key == key:
+                current.value = entry.value
+            inserted = False
+            while current.next is not None:
+                if current.key == key:
+                    current.value = entry.value
+                current = current.next
+                
+            current.next = entry
+
+            
 
 
 
@@ -103,7 +118,14 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        self.array[self.hash_index(key)] = None
+        if self.array[self.hash_index(key)] is not None:
+            if self.array[self.hash_index(key)].key == key:
+                self.array[self.hash_index(key)] = self.array[self.hash_index(key)].next
+            elif self.array[self.hash_index(key)].next is not None:
+                if self.array[self.hash_index(key)].next.next is None:
+                    self.array[self.hash_index(key)].next = None
+
+
 
 
     def get(self, key):
@@ -115,8 +137,18 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return self.array[self.hash_index(key)]
-        
+        if self.array[self.hash_index(key)]:
+            if self.array[self.hash_index(key)].next is None and self.array[self.hash_index(key)] == key:
+                return self.array[self.hash_index(key)].value
+            else:
+                current = self.array[self.hash_index(key)]
+                while current is not None:
+                    if(current.key == key):
+                        return current.value
+                    else:
+                        current = current.next
+        else:
+            return None
 
 
     def resize(self, new_capacity):
@@ -127,30 +159,47 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        oldArr = self.array
+        self.array = [None] * new_capacity
+        for x in range(0, len(oldArr)):
+            current = oldArr[x]
+            self.put(current.key, current.value)
+            while current.next is not None:
+                current = current.next
+                self.put(current.key, current.value)
 
 
 
 if __name__ == "__main__":
     ht = HashTable(8)
 
-    ht.put("line_1", "'Twas brillig, and the slithy toves")
-    ht.put("line_2", "Did gyre and gimble in the wabe:")
-    ht.put("line_3", "All mimsy were the borogoves,")
-    ht.put("line_4", "And the mome raths outgrabe.")
-    ht.put("line_5", '"Beware the Jabberwock, my son!')
-    ht.put("line_6", "The jaws that bite, the claws that catch!")
-    ht.put("line_7", "Beware the Jubjub bird, and shun")
-    ht.put("line_8", 'The frumious Bandersnatch!"')
-    ht.put("line_9", "He took his vorpal sword in hand;")
-    ht.put("line_10", "Long time the manxome foe he sought--")
-    ht.put("line_11", "So rested he by the Tumtum tree")
-    ht.put("line_12", "And stood awhile in thought.")
+    ht.put("key-0", "val-0")
+    ht.put("key-1", "val-1")
+    ht.put("key-2", "val-2")
+    ht.put("key-3", "val-3")
+    ht.put("key-4", "val-4")
+    ht.put("key-5", "val-5")
+    ht.put("key-6", "val-6")
+    ht.put("key-7", "val-7")
+    ht.put("key-8", "val-8")
+    ht.put("key-9", "val-9")
+
+    ht.put("key-0", "new-val-0")
+    ht.put("key-1", "new-val-1")
+    ht.put("key-2", "new-val-2")
+    ht.put("key-3", "new-val-3")
+    ht.put("key-4", "new-val-4")
+    ht.put("key-5", "new-val-5")
+    ht.put("key-6", "new-val-6")
+    ht.put("key-7", "new-val-7")
+    ht.put("key-8", "new-val-8")
+    ht.put("key-9", "new-val-9")
 
     print("")
 
     # Test storing beyond capacity
-    for i in range(1, 13):
-        print(ht.get(f"line_{i}"))
+    for i in range(1, 11):
+        print(ht.get(f"key-{i}"))
 
     # Test resizing
     old_capacity = ht.get_num_slots()
@@ -161,6 +210,6 @@ if __name__ == "__main__":
 
     # Test if data intact after resizing
     for i in range(1, 13):
-        print(ht.get(f"line_{i}"))
+        print(ht.get(f"key-{i}"))
 
     print("")
