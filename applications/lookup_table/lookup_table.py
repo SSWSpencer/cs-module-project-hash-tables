@@ -1,5 +1,8 @@
 # Your code here
+import random
+import math
 
+storage = {}
 
 def slowfun_too_slow(x, y):
     v = math.pow(x, y)
@@ -15,6 +18,13 @@ def slowfun(x, y):
     output, but completes quickly instead of taking ages to run.
     """
     # Your code here
+    key = f"{x},{y}"
+    try:
+        return storage[key]
+    except:
+        storage[key] = slowfun_too_slow(x,y)
+        return storage[key]
+    
 
 
 
