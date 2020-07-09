@@ -35,8 +35,8 @@ def removethings(s):
     s = s.replace("!", "")
     return s
 
-with open("ciphertext.txt") as inp:
-    data = set(inp.read().split())
+with open("ciphertext.txt") as f:
+    data = f.read()
     longstr = ""
     cache = {}
 
@@ -59,41 +59,90 @@ with open("ciphertext.txt") as inp:
 
     print(freqArr)
     
-    eRep = freqArr[0]
-    tRep = freqArr[1]
-    aRep = freqArr[2]
-    oRep = freqArr[3]
-    hRep = freqArr[4]
-    nRep = freqArr[5]
-    rRep = freqArr[6]
-    iRep = freqArr[7]
-    sRep = freqArr[8]
-    dRep = freqArr[9]
-    lRep = freqArr[10]
-    wRep = freqArr[11]
-    uRep = freqArr[12]
-    gRep = freqArr[13]
-    fRep = freqArr[14]
-    bRep = freqArr[15]
-    mRep = freqArr[16]
-    yRep = freqArr[17]
-    cRep = freqArr[18]
-    pRep = freqArr[19]
-    kRep = freqArr[20]
-    vRep = freqArr[21]
-    qRep = freqArr[22]
-    jRep = freqArr[23]
-    xRep = freqArr[24]
-    zRep = freqArr[25]
+    eRep = freqArr[1]
+    tRep = freqArr[2]
+    aRep = freqArr[3]
+    oRep = freqArr[4]
+    hRep = freqArr[5]
+    nRep = freqArr[6]
+    rRep = freqArr[7]
+    iRep = freqArr[8]
+    sRep = freqArr[9]
+    dRep = freqArr[10]
+    lRep = freqArr[11]
+    wRep = freqArr[12]
+    uRep = freqArr[13]
+    gRep = freqArr[14]
+    fRep = freqArr[15]
+    bRep = freqArr[16]
+    mRep = freqArr[17]
+    yRep = freqArr[18]
+    cRep = freqArr[19]
+    pRep = freqArr[20]
+    kRep = freqArr[21]
+    vRep = freqArr[23]
+    qRep = freqArr[24]
+    jRep = freqArr[25]
+    xRep = freqArr[26]
+    zRep = freqArr[27]
 
     finalStr = ""
     for x in data:
-        finalStr+= x + " "
-    finalStr.replace(aRep, "A")
-    finalStr.replace(eRep, "E")
-    finalStr.replace(iRep, "I")
-    finalStr.replace(oRep, "O")
-    finalStr.replace(uRep, "U")
-    finalStr.replace(yRep, "Y")
+        for i in x:
+            if i == aRep:
+                longstr+= "A"
+            elif i == bRep:
+                longstr+= "B"
+            elif i == cRep:
+                longstr+= "C"
+            elif i == dRep:
+                longstr+= "D"
+            elif i == eRep:
+                longstr+= "E"
+            elif i == fRep:
+                longstr+= "F"
+            elif i == gRep:
+                longstr+= "G"
+            elif i == hRep:
+                longstr+= "H"
+            elif i == iRep:
+                longstr+= "I"
+            elif i == jRep:
+                longstr+= "J"
+            elif i == kRep:
+                longstr+= "K"
+            elif i == lRep:
+                longstr+= "L"
+            elif i == mRep:
+                longstr+= "M"
+            elif i == nRep:
+                longstr+= "N"
+            elif i == oRep:
+                longstr+= "O"
+            elif i == pRep:
+                longstr+= "P"
+            elif i == qRep:
+                longstr+= "Q"
+            elif i == rRep:
+                longstr+= "R"
+            elif i == sRep:
+                longstr+= "S"
+            elif i == tRep:
+                longstr+= "T"
+            elif i == uRep:
+                longstr+= "U"
+            elif i == vRep:
+                longstr+= "V"
+            elif i == wRep:
+                longstr+= "W"
+            elif i == xRep:
+                longstr+= "X"
+            elif i == yRep:
+                longstr+= "Y"
+            elif i == zRep:
+                longstr+= "Z"
+            else:
+                longstr+= i
+    print(longstr)
+            
     
-    print(finalStr)
